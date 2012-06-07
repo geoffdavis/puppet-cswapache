@@ -1,6 +1,6 @@
-class apache::install {
-  require 'apache::params'
-  package { [ $apache::params::package_name ]:
+class cswapache::install {
+  require 'cswapache::params'
+  package { [ $cswapache::params::package_name ]:
     ensure => present,
   }
 }

@@ -1,11 +1,11 @@
-class apache::service {
-  require 'apache::params'
+class cswapache::service {
+  require 'cswapache::params'
 
-  service { $apache::params::service_name :
+  service { $cswapache::params::service_name :
     ensure      => running,
     hasstatus   => true,
     hasrestart  => true,
     enable      => true,
-    require     => Class['apache::install'],
+    require     => Class['cswapache::install'],
   }
 }

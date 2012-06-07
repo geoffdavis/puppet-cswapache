@@ -1,35 +1,35 @@
-class apache::config {
-  require 'apache::params'
-  include 'apache'
+class cswapache::config {
+  require 'cswapache::params'
+  include 'cswapache'
 
   # Set some defaults for the File type
   File {
-    owner   => $apache::params::owner,
-    group   => $apache::params::group,
-    require => Class['apache::install'],
-    notify  => Class['apache::service'],
+    owner   => $cswapache::params::owner,
+    group   => $cswapache::params::group,
+    require => Class['cswapache::install'],
+    notify  => Class['cswapache::service'],
   }
 
 # Set variables used by the httpd.conf template
-  $apache_runas_user = $apache::params::apache_runas_user
-  $apache_runas_group = $apache::params::apache_runas_group
-  $apache_serveradmin = $apache::params::apache_serveradmin
-  $apache_servername = $::fqdn
+  $cswapache_runas_user = $cswapache::params::apache_runas_user
+  $cswapache_runas_group = $cswapache::params::apache_runas_group
+  $cswapache_serveradmin = $cswapache::params::apache_serveradmin
+  $cswapache_servername = $::fqdn
 
   case $::operatingsystem {
     Solaris: {
-      file {"$apache::params::conf_dir/httpd.conf":
-        content => template ("apache/${::operatingsystem}/httpd.conf.erb"),
+      file {"$cswapache::params::conf_dir/httpd.conf":
+        content => template ("cswapache/${::operatingsystem}/httpd.conf.erb"),
         mode    => '0644',
       }
 
-      file {"$apache::params::conf_dir/vhosts.d":
+      file {"$cswapache::params::conf_dir/vhosts.d":
         ensure  => 'directory',
         mode    => '0755',
       }
     }
     default: {
-      fail("Unsupported os ${::operatingsystem} for apache::config")
+      fail("Unsupported os ${::operatingsystem} for cswapache::config")
     }
   }
 }

@@ -1,4 +1,4 @@
-class apache {
-  require 'apache::params'
-  include 'apache::install', 'apache::service', 'apache::config'
+class cswapache {
+  require 'cswapache::params'
+  include 'cswapache::install', 'cswapache::service', 'cswapache::config'
 }

@@ -133,8 +133,8 @@ LoadModule rewrite_module libexec/mod_rewrite.so
 # It is usually good practice to create a dedicated user and group for
 # running httpd, as with most system services.
 #
-User <%= apache_runas_user %>
-Group <%= apache_runas_group %>
+User <%= cswapache_runas_user %>
+Group <%= cswapache_runas_group %>
 
 </IfModule>
 </IfModule>
@@ -156,7 +156,7 @@ Group <%= apache_runas_group %>
 # e-mailed.  This address appears on some server-generated pages, such
 # as error documents.  e.g. admin@your-domain.com
 #
-ServerAdmin <%= apache_serveradmin %>
+ServerAdmin <%= cswapache_serveradmin %>
 
 #
 # ServerName gives the name and port that the server uses to identify itself.
@@ -165,7 +165,7 @@ ServerAdmin <%= apache_serveradmin %>
 #
 # If your host doesn't have a registered DNS name, enter its IP address here.
 #
-ServerName <%= apache_servername %>:80
+ServerName <%= cswapache_servername %>:80
 
 #
 # DocumentRoot: The directory out of which you will serve your

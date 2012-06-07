@@ -1,4 +1,4 @@
-define apache::vhost(
+define cswapache::vhost(
   $port,
   $docroot,
   $priority,
@@ -6,33 +6,33 @@ define apache::vhost(
   $template=undef,
   $serveraliases = ''
 ) {
-  include 'apache'
-  require 'apache::params'
+  include 'cswapache'
+  require 'cswapache::params'
 
 # Sanity check args
   if ! is_integer($port) {
-    fail('apache::vhost: parameter port must be an integer')
+    fail('cswapache::vhost: parameter port must be an integer')
   }
   if ! is_integer($priority) {
-    fail('apache::vhost: parameter priority must be an integer')
+    fail('cswapache::vhost: parameter priority must be an integer')
   }
   validate_string($docroot)
   validate_bool($ssl)
 
   if ! $template {
-    $template_real = $apache::params::template
+    $template_real = $cswapache::params::template
   } else {
     validate_string($template)
     $template_real = $template
   }
-  $logdir=$apache::params::logdir
+  $logdir=$cswapache::params::logdir
 
-  file {"${apache::params::vhosts_dir}/${priority}-${name}.conf":
+  file {"${cswapache::params::vhosts_dir}/${priority}-${name}.conf":
     content => template ($template_real),
-    owner   => $apache::params::owner,
-    group   => $apache::params::group,
+    owner   => $cswapache::params::owner,
+    group   => $cswapache::params::group,
     mode    => '0644',
-    require => Class['apache::install'],
-    notify  => Class['apache::service'],
+    require => Class['cswapache::install'],
+    notify  => Class['cswapache::service'],
   }
-} # define apache::vhost
+}
